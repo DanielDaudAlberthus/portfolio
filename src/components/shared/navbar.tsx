@@ -11,17 +11,18 @@ import {
 } from "@/components/ui/sheet"
 import { useDarkMode } from "@/hooks/use-dark-mode"
 import { useActiveSection } from "@/hooks/use-active-section"
-import { navLinks, personalInfo } from "@/data/portfolio"
+import { usePortfolio } from "@/context/portfolio-context"
 import { cn } from "@/lib/utils"
 
 export function Navbar() {
+  const { navLinks, personalInfo } = usePortfolio()
   const { isDark, toggle } = useDarkMode()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const sectionIds = useMemo(
     () => navLinks.map((l) => l.href.replace("#", "")),
-    []
+    [navLinks]
   )
   const activeId = useActiveSection(sectionIds)
 

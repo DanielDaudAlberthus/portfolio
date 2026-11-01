@@ -1,8 +1,10 @@
 import { Github, Linkedin, Twitter, Mail } from "lucide-react"
 import { MinimalistHero } from "@/components/ui/minimalist-hero"
-import { personalInfo, navLinks } from "@/data/portfolio"
+import { usePortfolio } from "@/context/portfolio-context"
 
 export function Hero() {
+  const { personalInfo, navLinks } = usePortfolio()
+
   const nameParts = personalInfo.name.split(" ")
   const firstName = nameParts[0]
   const lastName = nameParts.slice(1).join(" ") || personalInfo.role
@@ -20,7 +22,7 @@ export function Hero() {
   ]
 
   return (
-    <section id="home">
+    <section id="home" className="h-hero overflow-hidden">
       <MinimalistHero
         logoText={personalInfo.logoText}
         navLinks={heroNavLinks}

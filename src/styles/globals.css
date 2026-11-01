@@ -57,48 +57,26 @@
  * CSS custom properties for light/dark theming
  */
 :root {
-  --background: #f8fafc;
-  --foreground: #1e293b;
-  --card: #ffffff;
-  --card-foreground: #1e293b;
-  --popover: #ffffff;
-  --popover-foreground: #1e293b;
-  --primary: #2563eb;
-  --primary-foreground: #f8fafc;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #1e293b;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent-color: #10b981;
-  --accent-foreground: #f8fafc;
-  --destructive: #ef4444;
-  --destructive-foreground: #f8fafc;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #2563eb;
-  --radius: 0.5rem;
-}
-
-.dark {
-  --background: #0f172a;
+  --background: #0a0a0a;
   --foreground: #f1f5f9;
-  --card: #1e293b;
+  --card: #141414;
   --card-foreground: #f1f5f9;
-  --popover: #1e293b;
+  --popover: #141414;
   --popover-foreground: #f1f5f9;
-  --primary: #3b82f6;
-  --primary-foreground: #0f172a;
-  --secondary: #1e293b;
+  --primary: #e60000;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
   --secondary-foreground: #f1f5f9;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1aa;
   --accent-color: #34d399;
-  --accent-foreground: #0f172a;
+  --accent-foreground: #0a0a0a;
   --destructive: #ef4444;
   --destructive-foreground: #f1f5f9;
-  --border: #334155;
-  --input: #334155;
-  --ring: #3b82f6;
+  --border: #262626;
+  --input: #262626;
+  --ring: #e60000;
+  --radius: 0.5rem;
 }
 
 * {
@@ -111,4 +89,27 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Hero section height - bulletproof mobile viewport */
+.h-hero {
+  height: 100vh; /* fallback */
+  height: 100svh; /* modern browsers */
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Focus visible states for accessibility */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
 }

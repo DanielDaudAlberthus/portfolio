@@ -1,87 +1,34 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react"
-import { personalInfo, navLinks } from "@/data/portfolio"
+import { Github, Linkedin, Mail } from "lucide-react"
+import { usePortfolio } from "@/context/portfolio-context"
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const { personalInfo } = usePortfolio()
+
+  const socialLinks = [
+    { icon: Github, href: personalInfo.github, label: "GitHub" },
+    { icon: Linkedin, href: personalInfo.linkedin, label: "LinkedIn" },
+    { icon: Mail, href: `mailto:${personalInfo.email}`, label: "Email" },
+  ]
 
   return (
-    <footer className="border-t bg-muted/30">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
-          {/* Brand */}
-          <div className="flex flex-col items-center gap-2 md:items-start">
+    <footer className="border-t border-border/50 py-6">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6">
+        <p className="text-xs text-muted-foreground">
+          &copy; {new Date().getFullYear()} {personalInfo.logoText}
+        </p>
+        <div className="flex items-center gap-1">
+          {socialLinks.map((link) => (
             <a
-              href="#home"
-              className="flex items-center gap-2 font-bold text-lg tracking-tight"
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="rounded-full p-1.5 text-muted-foreground transition-colors hover:text-[var(--primary)]"
             >
-              <span className="flex size-8 items-center justify-center rounded-lg bg-[var(--primary)] text-white text-sm font-bold">
-                {personalInfo.name.charAt(0) === "["
-                  ? "P"
-                  : personalInfo.name.charAt(0)}
-              </span>
-              Portfolio
+              <link.icon className="size-3.5" />
             </a>
-            <p className="text-sm text-muted-foreground max-w-xs text-center md:text-left">
-              {personalInfo.tagline}
-            </p>
-          </div>
-
-          {/* Nav links */}
-          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Social */}
-          <div className="flex items-center gap-3">
-            {personalInfo.github && (
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <Github className="size-5" />
-              </a>
-            )}
-            {personalInfo.linkedin && (
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <Linkedin className="size-5" />
-              </a>
-            )}
-            {personalInfo.email && (
-              <a
-                href={`mailto:${personalInfo.email}`}
-                aria-label="Email"
-                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <Mail className="size-5" />
-              </a>
-            )}
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="mt-8 flex flex-col items-center gap-2 border-t pt-6 text-sm text-muted-foreground">
-          <p className="flex items-center gap-1">
-            Built with <Heart className="size-3.5 fill-red-500 text-red-500" />{" "}
-            using React & Tailwind CSS
-          </p>
-          <p>&copy; {currentYear} {personalInfo.name}. All rights reserved.</p>
+          ))}
         </div>
       </div>
     </footer>
